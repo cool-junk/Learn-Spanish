@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FFC800">
+<title>¡Hola! Learn Spanish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1F2340;--bg:#F1F5FF;--sun:#FFC800;--sund:#D9A800;--grn:#58CC02;--grnd:#46A302;--red:#FF4B4B;--redd:#D63333}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Baloo 2","Trebuchet MS",system-ui,sans-serif;font-weight:500;background:var(--bg);color:var(--ink);font-size:18px;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+#app{max-width:560px;margin:0 auto;padding:0 16px 120px}
+button{font:inherit;font-weight:700;cursor:pointer;border:0;color:inherit}
+button:focus-visible,input:focus-visible{outline:4px solid #1CB0F6;outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+.top h1{margin:0;font-size:2rem;font-weight:800;color:#FF4B6E}
+.stats{display:flex;gap:8px}
+.stats b{background:#fff;border-radius:99px;padding:2px 14px;box-shadow:0 3px 0 #dbe2f5}
+section{margin:0 0 22px}
+.ban{background:var(--c);color:#fff;border-radius:20px;padding:12px 18px;box-shadow:0 5px 0 var(--d)}
+.ban h2{margin:0;font-size:1.5rem;font-weight:800;line-height:1.2}
+.ban p{margin:0;opacity:.9;font-size:.9rem}
+.ls{display:flex;gap:12px;flex-wrap:wrap;padding:14px 4px 0}
+.tile{width:64px;height:64px;border-radius:50%;background:var(--c);color:#fff;font-size:1.5rem;box-shadow:0 6px 0 var(--d)}
+.tile.ok{background:var(--grn);box-shadow:0 6px 0 var(--grnd)}
+.tile:active,.btn:active,.opt:active{transform:translateY(3px);box-shadow:none}
+.btn{display:block;width:100%;padding:14px;border-radius:16px;background:var(--grn);color:#fff;font-size:1.15rem;box-shadow:0 5px 0 var(--grnd);margin-top:12px}
+.btn.alt{background:#fff;color:#1CB0F6;box-shadow:0 5px 0 #dbe2f5}
+.btn[disabled]{background:#dfe4f0;box-shadow:0 5px 0 #c6cde0;color:#98a0b8;cursor:default}
+.bar{display:flex;align-items:center;gap:12px;padding:16px 0}
+.x{background:none;font-size:1.6rem;color:#98a0b8}
+.prog{flex:1;height:16px;background:#dfe4f0;border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--grn);border-radius:99px;transition:width .3s}
+.hearts{color:var(--red);font-weight:800}
+.card{display:flex;align-items:center;gap:12px;background:#fff;border-radius:18px;padding:12px 16px;margin:10px 0;box-shadow:0 4px 0 #dbe2f5}
+.card .es{font-size:1.5rem;font-weight:800;color:var(--c)}
+.card .en{margin-left:auto;color:#5b6285}
+.say{background:#E3F4FF;color:#1CB0F6;border-radius:12px;width:40px;height:40px;font-size:1.1rem;flex:none}
+h3{font-size:1.5rem;margin:6px 0 4px}
+.q{font-size:2.4rem;font-weight:800;text-align:center;margin:26px 0 22px;color:#7C4DFF;line-height:1.15}
+.q small{display:block;font-size:1rem;color:#5b6285;font-weight:500;margin-bottom:6px}
+.opts{display:grid;gap:12px}
+.opt{background:#fff;border-radius:16px;padding:14px;font-size:1.25rem;box-shadow:0 5px 0 #dbe2f5;border:2px solid #dbe2f5}
+.opt.good{background:#D7FFB8;border-color:var(--grn);box-shadow:0 5px 0 var(--grnd)}
+.opt.bad{background:#FFDFE0;border-color:var(--red);box-shadow:0 5px 0 var(--redd)}
+input[type=text]{width:100%;font:inherit;font-size:1.4rem;padding:14px;border-radius:16px;border:3px solid #dbe2f5;text-align:center}
+.keys{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.keys button{background:#fff;border-radius:12px;width:44px;height:44px;font-size:1.2rem;box-shadow:0 3px 0 #dbe2f5}
+.fb{position:fixed;left:0;right:0;bottom:0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));background:#fff}
+.fb.good{background:#D7FFB8}.fb.bad{background:#FFDFE0}
+.fb div{max-width:560px;margin:0 auto}
+.fb h4{margin:0;font-size:1.3rem}
+.fb.good h4{color:#46A302}.fb.bad h4{color:#D63333}
+.fb .btn{margin-top:10px}.fb.bad .btn{background:var(--red);box-shadow:0 5px 0 var(--redd)}
+.big{text-align:center;margin-top:40px}
+.big h2{font-size:2.4rem;margin:0;font-weight:800;color:#FF4B6E}
+.pill{display:inline-block;background:var(--sun);box-shadow:0 5px 0 var(--sund);border-radius:18px;padding:8px 22px;font-size:1.6rem;font-weight:800;margin:18px 6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+const U=[
+{n:"Greetings",c:"#FF4B6E",d:"#D63358",w:[["Hola","Hello"],["Buenos días","Good morning"],["Buenas tardes","Good afternoon"],["Buenas noches","Good night"],["Adiós","Goodbye"],["Por favor","Please"],["Gracias","Thank you"],["De nada","You're welcome"],["¿Cómo estás?","How are you?"],["Muy bien","Very well"]]},
+{n:"The Basics",c:"#1CB0F6",d:"#1288BC",w:[["Sí","Yes"],["No","No"],["Yo","I"],["Tú","You"],["Él","He"],["Ella","She"],["Nosotros","We"],["Mucho gusto","Nice to meet you"],["Perdón","Sorry"],["Me llamo","My name is"]]},
+{n:"Numbers",c:"#FF9600",d:"#CC7800",w:[["Uno","One"],["Dos","Two"],["Tres","Three"],["Cuatro","Four"],["Cinco","Five"],["Seis","Six"],["Siete","Seven"],["Ocho","Eight"],["Nueve","Nine"],["Diez","Ten"]]},
+{n:"Colors",c:"#7C4DFF",d:"#5C36C9",w:[["Rojo","Red"],["Azul","Blue"],["Verde","Green"],["Amarillo","Yellow"],["Negro","Black"],["Blanco","White"],["Naranja","Orange"],["Morado","Purple"],["Rosa","Pink"],["Gris","Gray"]]},
+{n:"Family",c:"#00B8A9",d:"#008C80",w:[["Madre","Mother"],["Padre","Father"],["Hermano","Brother"],["Hermana","Sister"],["Abuelo","Grandfather"],["Abuela","Grandmother"],["Hijo","Son"],["Hija","Daughter"],["Amigo","Friend"],["Familia","Family"]]},
+{n:"Food & Drink",c:"#E8A800",d:"#B58500",w:[["Agua","Water"],["Pan","Bread"],["Leche","Milk"],["Manzana","Apple"],["Queso","Cheese"],["Pollo","Chicken"],["Arroz","Rice"],["Café","Coffee"],["Sopa","Soup"],["Huevo","Egg"]]},
+{n:"Useful Verbs",c:"#58CC02",d:"#46A302",w:[["Comer","To eat"],["Beber","To drink"],["Hablar","To speak"],["Vivir","To live"],["Querer","To want"],["Ir","To go"],["Tener","To have"],["Ser","To be"],["Estar","To be (feeling or place)"],["Ver","To see"]]},
+{n:"Question Words",c:"#E040A0",d:"#B02A7D",w:[["¿Qué?","What?"],["¿Quién?","Who?"],["¿Dónde?","Where?"],["¿Cuándo?","When?"],["¿Por qué?","Why?"],["¿Cómo?","How?"],["¿Cuánto?","How much?"],["¿Cuál?","Which?"]]}
+];
+const $=s=>document.querySelector(s),app=$("#app");
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+const chunks=u=>{const r=[];for(let i=0;i<u.w.length;i+=5)r.push(u.w.slice(i,i+5));return r};
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[¿?¡!.,]/g,"").replace(/\s+/g," ").trim();
+let S={xp:0,streak:0,last:"",done:{}};
+try{S=Object.assign(S,JSON.parse(localStorage.getItem("hola-spanish")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("hola-spanish",JSON.stringify(S))}catch(e){}};
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="es-ES";u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b)say(b.dataset.t)});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"){const b=$("#go");if(b&&!b.disabled)b.click()}});
+
+function home(){
+ app.innerHTML=`<header class="top"><h1>¡Hola!</h1><div class="stats"><b>🔥 ${S.streak}</b><b>⭐ ${S.xp}</b></div></header>`+
+ U.map((u,ui)=>`<section style="--c:${u.c};--d:${u.d}"><div class="ban"><h2>${u.n}</h2><p>${u.w.length} words</p></div><div class="ls">${chunks(u).map((_,li)=>{const k=ui+"-"+li,ok=S.done[k];return `<button class="tile ${ok?"ok":""}" aria-label="${u.n} lesson ${li+1}" onclick="teach(${ui},${li})">${ok?"✓":li+1}</button>`}).join("")}</div></section>`).join("");
+ scrollTo(0,0);
+}
+function teach(ui,li){
+ const u=U[ui],w=chunks(u)[li];
+ app.innerHTML=`<div style="--c:${u.c}"><div class="bar"><button class="x" aria-label="Back" onclick="home()">✕</button></div><h3>New words</h3><p style="margin:0;color:#5b6285">Tap 🔊 to hear each one.</p>`+
+ w.map(x=>`<div class="card"><button class="say" aria-label="Hear ${x[0]}" data-t="${x[0]}">🔊</button><span class="es">${x[0]}</span><span class="en">${x[1]}</span></div>`).join("")+
+ `<button class="btn" id="go" onclick="start(${ui},${li})">Start lesson</button></div>`;
+ scrollTo(0,0);
+}
+let Q,cur,OP,locked;
+function start(ui,li){
+ const w=chunks(U[ui])[li];
+ Q={ui,li,hearts:5,ok:0,i:0,q:[...sh(w).map(x=>({w:x,t:"a"})),...sh(w).map(x=>({w:x,t:"b"})),...sh(w).slice(0,3).map(x=>({w:x,t:"c"}))]};
+ Q.total=Q.q.length;ask();
+}
+function options(k){
+ const ans=cur.w[k],all=U.flatMap(u=>u.w),same=U[Q.ui].w;
+ const pool=[...sh(same),...sh(all)].map(x=>x[k]).filter(t=>t!==ans);
+ const out=[...new Set(pool)].slice(0,3);
+ return sh([ans,...out]);
+}
+function ask(){
+ cur=Q.q[Q.i];locked=false;
+ const pct=Math.min(100,Math.round(Q.i/Q.q.length*100));
+ let body="";
+ if(cur.t==="a"){OP=options(1);body=`<div class="q"><small>What does this mean?</small>${cur.w[0]} <button class="say" aria-label="Hear it" data-t="${cur.w[0]}">🔊</button></div>`}
+ if(cur.t==="b"){OP=options(0);body=`<div class="q"><small>How do you say this in Spanish?</small>${cur.w[1]}</div>`}
+ if(cur.t==="a"||cur.t==="b")body+=`<div class="opts">${OP.map((o,i)=>`<button class="opt" onclick="pick(${i})">${o}</button>`).join("")}</div>`;
+ if(cur.t==="c")body=`<div class="q"><small>Type it in Spanish</small>${cur.w[1]}</div><input type="text" id="ans" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Your answer"><div class="keys">${["á","é","í","ó","ú","ñ","¿","¡"].map(c=>`<button onclick="ins('${c}')">${c}</button>`).join("")}</div><button class="btn" id="go" onclick="check()">Check</button>`;
+ app.innerHTML=`<div class="bar"><button class="x" aria-label="Quit lesson" onclick="if(confirm('Quit this lesson?'))home()">✕</button><div class="prog"><i style="width:${pct}%"></i></div><span class="hearts">❤ ${Q.hearts}</span></div>${body}<div id="fb"></div>`;
+ if(cur.t==="a")say(cur.w[0]);
+ if(cur.t==="c")$("#ans").focus();
+}
+function ins(c){const i=$("#ans");i.value+=c;i.focus()}
+function pick(i){
+ if(locked)return;
+ const k=cur.t==="a"?1:0,right=cur.w[k],ok=OP[i]===right;
+ document.querySelectorAll(".opt").forEach((b,j)=>{if(OP[j]===right)b.classList.add("good");else if(j===i)b.classList.add("bad");b.disabled=true});
+ if(cur.t==="b")say(cur.w[0]);
+ feedback(ok,right);
+}
+function check(){
+ const v=$("#ans").value;if(!v.trim())return;
+ const ok=norm(v)===norm(cur.w[0]);
+ $("#ans").disabled=true;say(cur.w[0]);
+ feedback(ok,cur.w[0]);
+}
+function feedback(ok,right){
+ locked=true;
+ if(ok){Q.ok++}else{Q.hearts--;if(!cur.again)Q.q.push({...cur,again:true})}
+ const out=Q.hearts<=0;
+ $("#fb").innerHTML=`<div class="fb ${ok?"good":"bad"}"><div><h4>${ok?["Great job!","Perfect!","¡Muy bien!","Correct!"][Math.floor(Math.random()*4)]:"Not quite"}</h4>${ok?"":`<p style="margin:2px 0 0">Answer: <b>${right}</b></p>`}<button class="btn" id="go" onclick="next()">${out?"Continue":"Continue"}</button></div></div>`;
+ $("#go").focus();
+}
+function next(){
+ if(Q.hearts<=0)return fail();
+ Q.i++;
+ Q.i>=Q.q.length?finish():ask();
+}
+function finish(){
+ const xp=Q.ok*10,t=new Date(),today=t.toDateString(),y=new Date(t-864e5).toDateString();
+ if(S.last!==today){S.streak=S.last===y?S.streak+1:1;S.last=today}
+ S.xp+=xp;S.done[Q.ui+"-"+Q.li]=1;save();
+ app.innerHTML=`<div class="big"><h2>Lesson complete!</h2><p>You are getting better at Spanish.</p><span class="pill">+${xp} XP</span><span class="pill" style="background:#FFDFE0;box-shadow:0 5px 0 #f5b9bb">❤ ${Q.hearts} left</span><button class="btn" id="go" onclick="home()">Back to the path</button><button class="btn alt" onclick="teach(${Q.ui},${Q.li})">Review these words</button></div>`;
+}
+function fail(){
+ app.innerHTML=`<div class="big"><h2 style="color:#FF4B4B">Out of hearts</h2><p>No worries. Look over the words once more and try again.</p><button class="btn" id="go" onclick="teach(${Q.ui},${Q.li})">Review and retry</button><button class="btn alt" onclick="home()">Back to the path</button></div>`;
+}
+home();
+</script>
+</body>
+</html>
