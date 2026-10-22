@@ -58,13 +58,22 @@ input[type=text]{width:100%;font:inherit;font-size:1.4rem;padding:14px;border-ra
 .big{text-align:center;margin-top:40px}
 .big h2{font-size:2.4rem;margin:0;font-weight:800;color:#FF4B6E}
 .pill{display:inline-block;background:var(--sun);box-shadow:0 5px 0 var(--sund);border-radius:18px;padding:8px 22px;font-size:1.6rem;font-weight:800;margin:18px 6px}
+.hello{text-align:center;padding:30px 0 18px}
+.hello h1{margin:0;font-size:3.2rem;font-weight:800;color:#FF4B6E;line-height:1}
+.hello p{margin:6px 0 0;color:#5b6285}
+.lang{display:block;width:100%;text-align:left;background:var(--c);color:#fff;border-radius:20px;padding:14px 20px;margin:0 0 16px;box-shadow:0 6px 0 var(--d)}
+.lang b{display:block;font-size:2rem;font-weight:800;line-height:1.1}
+.lang span{font-size:.95rem;font-weight:500}
+.lang:active{transform:translateY(3px);box-shadow:none}
+.back{background:none;font-size:1rem;color:#5b6285;padding:6px 0}
+.rev{position:fixed;right:12px;bottom:calc(8px + env(safe-area-inset-bottom,0px));font-size:.7rem;color:#6b7394}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <main id="app"></main>
 <script>
-const U=[
+const ES=[
 {n:"Greetings",c:"#FF4B6E",d:"#D63358",w:[["Hola","Hello"],["Buenos días","Good morning"],["Buenas tardes","Good afternoon"],["Buenas noches","Good night"],["Adiós","Goodbye"],["Por favor","Please"],["Gracias","Thank you"],["De nada","You're welcome"],["¿Cómo estás?","How are you?"],["Muy bien","Very well"]]},
 {n:"The Basics",c:"#1CB0F6",d:"#1288BC",w:[["Sí","Yes"],["No","No"],["Yo","I"],["Tú","You"],["Él","He"],["Ella","She"],["Nosotros","We"],["Mucho gusto","Nice to meet you"],["Perdón","Sorry"],["Me llamo","My name is"]]},
 {n:"Numbers",c:"#FF9600",d:"#CC7800",w:[["Uno","One"],["Dos","Two"],["Tres","Three"],["Cuatro","Four"],["Cinco","Five"],["Seis","Six"],["Siete","Seven"],["Ocho","Eight"],["Nueve","Nine"],["Diez","Ten"]]},
@@ -74,20 +83,53 @@ const U=[
 {n:"Useful Verbs",c:"#58CC02",d:"#46A302",w:[["Comer","To eat"],["Beber","To drink"],["Hablar","To speak"],["Vivir","To live"],["Querer","To want"],["Ir","To go"],["Tener","To have"],["Ser","To be"],["Estar","To be (feeling or place)"],["Ver","To see"]]},
 {n:"Question Words",c:"#E040A0",d:"#B02A7D",w:[["¿Qué?","What?"],["¿Quién?","Who?"],["¿Dónde?","Where?"],["¿Cuándo?","When?"],["¿Por qué?","Why?"],["¿Cómo?","How?"],["¿Cuánto?","How much?"],["¿Cuál?","Which?"]]}
 ];
+const P=s=>s.split("|").map(x=>x.split("="));
+const mk=(i,s)=>({...ES[i],w:P(s)});
+const LANGS={
+es:{name:"Spanish",native:"Español",c:"#FF4B6E",d:"#D63358",voice:"es-ES",keys:"áéíóúñ¿¡",units:ES},
+fr:{name:"French",native:"Français",c:"#1CB0F6",d:"#1288BC",voice:"fr-FR",keys:"àâçéèêëîôùû",units:[
+mk(0,"Bonjour=Hello|Bonsoir=Good evening|Bonne nuit=Good night|Au revoir=Goodbye|S'il vous plaît=Please|Merci=Thank you|De rien=You're welcome|Comment allez-vous ?=How are you?|Très bien=Very well|Salut=Hi"),
+mk(1,"Oui=Yes|Non=No|Je=I|Tu=You|Il=He|Elle=She|Nous=We|Enchanté=Nice to meet you|Pardon=Sorry|Je m'appelle=My name is"),
+mk(2,"Un=One|Deux=Two|Trois=Three|Quatre=Four|Cinq=Five|Six=Six|Sept=Seven|Huit=Eight|Neuf=Nine|Dix=Ten"),
+mk(3,"Rouge=Red|Bleu=Blue|Vert=Green|Jaune=Yellow|Noir=Black|Blanc=White|Orange=Orange|Violet=Purple|Rose=Pink|Gris=Gray")]},
+it:{name:"Italian",native:"Italiano",c:"#58CC02",d:"#46A302",voice:"it-IT",keys:"àèéìòù",units:[
+mk(0,"Ciao=Hello|Buongiorno=Good morning|Buonasera=Good evening|Buonanotte=Good night|Arrivederci=Goodbye|Per favore=Please|Grazie=Thank you|Prego=You're welcome|Come stai?=How are you?|Molto bene=Very well"),
+mk(1,"Sì=Yes|No=No|Io=I|Tu=You|Lui=He|Lei=She|Noi=We|Piacere=Nice to meet you|Scusa=Sorry|Mi chiamo=My name is"),
+mk(2,"Uno=One|Due=Two|Tre=Three|Quattro=Four|Cinque=Five|Sei=Six|Sette=Seven|Otto=Eight|Nove=Nine|Dieci=Ten"),
+mk(3,"Rosso=Red|Blu=Blue|Verde=Green|Giallo=Yellow|Nero=Black|Bianco=White|Arancione=Orange|Viola=Purple|Rosa=Pink|Grigio=Gray")]},
+de:{name:"German",native:"Deutsch",c:"#FF9600",d:"#CC7800",voice:"de-DE",keys:"äöüß",units:[
+mk(0,"Hallo=Hello|Guten Morgen=Good morning|Guten Tag=Good afternoon|Gute Nacht=Good night|Auf Wiedersehen=Goodbye|Bitte=Please|Danke=Thank you|Gern geschehen=You're welcome|Wie geht's?=How are you?|Sehr gut=Very well"),
+mk(1,"Ja=Yes|Nein=No|Ich=I|Du=You|Er=He|Sie=She|Wir=We|Freut mich=Nice to meet you|Entschuldigung=Sorry|Ich heiße=My name is"),
+mk(2,"Eins=One|Zwei=Two|Drei=Three|Vier=Four|Fünf=Five|Sechs=Six|Sieben=Seven|Acht=Eight|Neun=Nine|Zehn=Ten"),
+mk(3,"Rot=Red|Blau=Blue|Grün=Green|Gelb=Yellow|Schwarz=Black|Weiß=White|Orange=Orange|Lila=Purple|Rosa=Pink|Grau=Gray")]}
+};
+const REV="1.1";
+let LG="es",U=ES;
 const $=s=>document.querySelector(s),app=$("#app");
+const K=(ui,li)=>(LG==="es"?"":LG+"-")+ui+"-"+li;
 const sh=a=>[...a].sort(()=>Math.random()-.5);
 const chunks=u=>{const r=[];for(let i=0;i<u.w.length;i+=5)r.push(u.w.slice(i,i+5));return r};
-const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[¿?¡!.,]/g,"").replace(/\s+/g," ").trim();
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ß/g,"ss").replace(/-/g," ").replace(/['’¿?¡!.,]/g,"").replace(/\s+/g," ").trim();
 let S={xp:0,streak:0,last:"",done:{}};
 try{S=Object.assign(S,JSON.parse(localStorage.getItem("hola-spanish")||"{}"))}catch(e){}
 const save=()=>{try{localStorage.setItem("hola-spanish",JSON.stringify(S))}catch(e){}};
-function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="es-ES";u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=LANGS[LG].voice;u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
 document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b)say(b.dataset.t)});
 document.addEventListener("keydown",e=>{if(e.key==="Enter"){const b=$("#go");if(b&&!b.disabled)b.click()}});
 
+function langs(){
+ app.innerHTML=`<div class="hello"><h1>¡Hola!</h1><p>What do you want to learn?</p></div>`+
+ Object.entries(LANGS).map(([k,l])=>{
+  const n=l.units.reduce((a,u)=>a+chunks(u).length,0),w=l.units.reduce((a,u)=>a+u.w.length,0);
+  const d=Object.keys(S.done).filter(x=>k==="es"?/^[0-9]/.test(x):x.startsWith(k+"-")).length;
+  return `<button class="lang" style="--c:${l.c};--d:${l.d}" onclick="setLang('${k}')"><b>${l.native}</b><span>${l.name}: ${w} words, ${d} of ${n} lessons done</span></button>`}).join("")+
+ `<div class="rev">v${REV}</div>`;
+ scrollTo(0,0);
+}
+function setLang(k){LG=k;U=LANGS[k].units;home()}
 function home(){
- app.innerHTML=`<header class="top"><h1>¡Hola!</h1><div class="stats"><b>🔥 ${S.streak}</b><b>⭐ ${S.xp}</b></div></header>`+
- U.map((u,ui)=>`<section style="--c:${u.c};--d:${u.d}"><div class="ban"><h2>${u.n}</h2><p>${u.w.length} words</p></div><div class="ls">${chunks(u).map((_,li)=>{const k=ui+"-"+li,ok=S.done[k];return `<button class="tile ${ok?"ok":""}" aria-label="${u.n} lesson ${li+1}" onclick="teach(${ui},${li})">${ok?"✓":li+1}</button>`}).join("")}</div></section>`).join("");
+ app.innerHTML=`<header class="top"><button class="back" onclick="langs()">‹ Languages</button><div class="stats"><b>🔥 ${S.streak}</b><b>⭐ ${S.xp}</b></div></header><h2 style="margin:0 0 14px;font-size:1.8rem;font-weight:800;color:${LANGS[LG].c}">${LANGS[LG].native}</h2>`+
+ U.map((u,ui)=>`<section style="--c:${u.c};--d:${u.d}"><div class="ban"><h2>${u.n}</h2><p>${u.w.length} words</p></div><div class="ls">${chunks(u).map((_,li)=>{const ok=S.done[K(ui,li)];return `<button class="tile ${ok?"ok":""}" aria-label="${u.n} lesson ${li+1}" onclick="teach(${ui},${li})">${ok?"✓":li+1}</button>`}).join("")}</div></section>`).join("");
  scrollTo(0,0);
 }
 function teach(ui,li){
@@ -114,9 +156,9 @@ function ask(){
  const pct=Math.min(100,Math.round(Q.i/Q.q.length*100));
  let body="";
  if(cur.t==="a"){OP=options(1);body=`<div class="q"><small>What does this mean?</small>${cur.w[0]} <button class="say" aria-label="Hear it" data-t="${cur.w[0]}">🔊</button></div>`}
- if(cur.t==="b"){OP=options(0);body=`<div class="q"><small>How do you say this in Spanish?</small>${cur.w[1]}</div>`}
+ if(cur.t==="b"){OP=options(0);body=`<div class="q"><small>How do you say this in ${LANGS[LG].name}?</small>${cur.w[1]}</div>`}
  if(cur.t==="a"||cur.t==="b")body+=`<div class="opts">${OP.map((o,i)=>`<button class="opt" onclick="pick(${i})">${o}</button>`).join("")}</div>`;
- if(cur.t==="c")body=`<div class="q"><small>Type it in Spanish</small>${cur.w[1]}</div><input type="text" id="ans" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Your answer"><div class="keys">${["á","é","í","ó","ú","ñ","¿","¡"].map(c=>`<button onclick="ins('${c}')">${c}</button>`).join("")}</div><button class="btn" id="go" onclick="check()">Check</button>`;
+ if(cur.t==="c")body=`<div class="q"><small>Type it in ${LANGS[LG].name}</small>${cur.w[1]}</div><input type="text" id="ans" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Your answer"><div class="keys">${[...LANGS[LG].keys].map(c=>`<button onclick="ins('${c}')">${c}</button>`).join("")}</div><button class="btn" id="go" onclick="check()">Check</button>`;
  app.innerHTML=`<div class="bar"><button class="x" aria-label="Quit lesson" onclick="if(confirm('Quit this lesson?'))home()">✕</button><div class="prog"><i style="width:${pct}%"></i></div><span class="hearts">❤ ${Q.hearts}</span></div>${body}<div id="fb"></div>`;
  if(cur.t==="a")say(cur.w[0]);
  if(cur.t==="c")$("#ans").focus();
@@ -150,13 +192,13 @@ function next(){
 function finish(){
  const xp=Q.ok*10,t=new Date(),today=t.toDateString(),y=new Date(t-864e5).toDateString();
  if(S.last!==today){S.streak=S.last===y?S.streak+1:1;S.last=today}
- S.xp+=xp;S.done[Q.ui+"-"+Q.li]=1;save();
- app.innerHTML=`<div class="big"><h2>Lesson complete!</h2><p>You are getting better at Spanish.</p><span class="pill">+${xp} XP</span><span class="pill" style="background:#FFDFE0;box-shadow:0 5px 0 #f5b9bb">❤ ${Q.hearts} left</span><button class="btn" id="go" onclick="home()">Back to the path</button><button class="btn alt" onclick="teach(${Q.ui},${Q.li})">Review these words</button></div>`;
+ S.xp+=xp;S.done[K(Q.ui,Q.li)]=1;save();
+ app.innerHTML=`<div class="big"><h2>Lesson complete!</h2><p>You are getting better at ${LANGS[LG].name}.</p><span class="pill">+${xp} XP</span><span class="pill" style="background:#FFDFE0;box-shadow:0 5px 0 #f5b9bb">❤ ${Q.hearts} left</span><button class="btn" id="go" onclick="home()">Back to the path</button><button class="btn alt" onclick="teach(${Q.ui},${Q.li})">Review these words</button></div>`;
 }
 function fail(){
  app.innerHTML=`<div class="big"><h2 style="color:#FF4B4B">Out of hearts</h2><p>No worries. Look over the words once more and try again.</p><button class="btn" id="go" onclick="teach(${Q.ui},${Q.li})">Review and retry</button><button class="btn alt" onclick="home()">Back to the path</button></div>`;
 }
-home();
+langs();
 </script>
 </body>
 </html>
